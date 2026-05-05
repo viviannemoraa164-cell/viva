@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Shadows+Into+Light+Two&display=swap');
+
+
+body {
+  font-family: "Shadows Into Light Two", cursive !important;
+  background-image: url(..//public/images/bgg.jpg);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* change background */
+.full-height{
+  background-color:burlywood;
+  min-height: 100vh;
+}
