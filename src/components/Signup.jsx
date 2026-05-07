@@ -1,59 +1,75 @@
 import axios from 'axios'
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Signup = () => {
-    // declare our state here 
-    const [username , setUsername]=useState("")
-    const [email , setEmail]=useState("")
-    const [password ,setPassword]=useState("")
-    const [phone, setPhone]=useState("")
-    
-    // 3 states for posting data 
-    const [loading , setLoading]=useState("")
-    const [success , setSuccess]=useState("")
-    const [error , setError]=useState("")
-    // function to handle submit 
-    const handlesubmit = async(e) => {
-      e.preventDefault()
-      setLoading("Please wait....")
-      // create an empty digital envelope
-      const formdata = new FormData()
-      formdata.append ("username" ,username)
-      formdata.append("email" ,email)
-      formdata.append("password",password)
-      formdata.append("phone",phone)
-      try {
-        const response= await axios.post("http://vivakifaru.alwaysdata.net/api/signup",formdata)
-        setSuccess(response.data.message)
-        setLoading("")
-        
-      } catch (error) {
-        setError(error.message)
-        setLoading("");
-        
-      }
-    
-      
+  // declare our state here 
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [phone, setPhone] = useState("")
+  const [strength, setStrength] = useState("")
+  // 3 states for posting data 
+  const [loading, setLoading] = useState("")
+  const [success, setSuccess] = useState("")
+  const [error, setError] = useState("")
+  // function to handle submit 
+  const handlesubmit = async (e) => {
+    e.preventDefault()
+    setLoading("Please wait....")
+    // create an empty digital envelope
+    const formdata = new FormData()
+    formdata.append("username", username)
+    formdata.append("email", email)
+    formdata.append("password", password)
+    formdata.append("phone", phone)
+    try {
+      const response = await axios.post("http://vivakifaru.alwaysdata.net/api/signup", formdata)
+      setSuccess(response.data.message)
+      setLoading("")
+
+    } catch (error) {
+      setError(error.message)
+      setLoading("");
+
     }
+
+
+  }
+
+  const checkPasswordStrength = (password) => {
+    if (password.length < 4) {
+      setStrength("weak");
+
+    } else if (password.length < 8) {
+      setStrength("medium");
+    } else {
+      setStrength("strong");
+    }
+  };
   return (
     <div className="row mt-2 justify-content-center ">
-        <div className='col-md-6 card shadow bg-dark'>
-            <h1 className='shadows-into-light-two-regular text-success'> <b><u>Sign up</u></b>✔️</h1>
-            {/* bind the states  */}
-            <h2 className="text-info">{loading}</h2>
-            <h2 className="text-success">{success}</h2>
-            <h2 className="text-danger">{error}</h2>
-            <form action="" onSubmit={handlesubmit}>
-                <input type="text"   placeholder= '👤 Enter username' className='form-control' onChange={(e)=> setUsername(e.target.value)} /><br/>
-                <input type="email" placeholder='📄 enter email' className='form-control' onChange={(e)=>setEmail(e.target.value)} /><br/>
-                <input type="password" placeholder='♣️ enter password' className='form-control' onChange={(e)=>setPassword(e.target.value)}/><br/>
-                <input type="number" placeholder=' 📌enter phone' className='form-control' onChange={(e)=>setPhone(e.target.value)}/><br/>
-                <button type='submit'  className='btn  btn-success w-100'>Signup</button><br />
-                <p className='text-success'>Already have an account? <Link to="/signin">Signin</Link> </p>
+      <div className='col-md-6 card shadow bg-dark'>
+        <h1 className='shadows-into-light-two-regular text-success'> <b><u>Sign up</u></b>✔️</h1>
+        {/* bind the states  */}
+        <h2 className="text-info">{loading}</h2>
+        <h2 className="text-success">{success}</h2>
+        <h2 className="text-danger">{error}</h2>
+        <form action="" onSubmit={handlesubmit}>
+          <input type="text" placeholder='👤 Enter username' className='form-control' onChange={(e) => setUsername(e.target.value)} /><br />
+          <input type="email" placeholder='📄 enter email' className='form-control' onChange={(e) => setEmail(e.target.value)} /><br />
+          <input type="password" placeholder='♣️ enter password' className='form-control' onChange={(e) => { setPassword(e.target.value); checkPasswordStrength(e.target.value); }} /><br />
+          {password&&(<p style={{color:strength==="weak"?"red":strength==="medium"?"orange":"green",}}>
+            password strength:{strength}
 
-            </form>
-        </div>
+          </p>)}
+          <input type="number" placeholder=' 📌enter phone' className='form-control' onChange={(e) => setPhone(e.target.value)} /><br />
+
+          <button type='submit' className='btn  btn-success w-100'>Signup</button><br />
+          <p className='text-success'>Already have an account? <Link to="/signin">Signin</Link> </p>
+
+        </form>
+      </div>
 
     </div>
   )

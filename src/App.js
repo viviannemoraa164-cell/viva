@@ -12,7 +12,7 @@ import Signin from './components/Signin';
 import Addproduct from './components/Addproduct';
 import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayment';
-import Footer from './components/Footer';
+
 import Navbar from './components/Navbar';
 
 function App() {
@@ -44,12 +44,16 @@ function App() {
 
 
         </Routes>
-        <Footer />
+        
+        <hr />
+        
+
         <div>
-          <footer className='bg-success p-2 text-center text-dark'>
-            <h2><i>Developed by Viva &copy;. 2026</i></h2>
+          <footer className=' p-2 text-center text-dark'>
+            <marquee behavior="" direction=""><h2><i>&copy;. 2026,Viva aesthetics.All rights reserved∣Designed By Viva</i></h2></marquee>
           </footer>
         </div>
+        
 
       </div>
     </BrowserRouter>

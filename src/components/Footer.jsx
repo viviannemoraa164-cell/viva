@@ -19,6 +19,7 @@ const Footer = () => {
                 <input type="submit" value="Send Message" class="btn btn-outline-danger"/>
             </form>
         </div>
+        
 
         {/* <!-- child 3  --> */}
         <div class="col-md-4">
@@ -41,5 +42,6 @@ const Footer = () => {
     </div>
   )
 }
+
 
 export default Footer
