@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Carousel from './Carousel'
 import Footer from './Footer'
-import WishlistApp from './wishlist'
+import {useCart} from './CartContext';
+// import WishlistApp from './wishlist'
 
 
 
@@ -14,6 +15,8 @@ const Getproducts = () => {
     const [products, setProducts] = useState([])
     const [error, setError] = useState("")
     const [search, setSearch] = useState("")
+    const {addToCart} =useCart()
+    
     const [visibleCount, setVisibleCount] = useState(8)
 
     const filtered_products = products.filter((item) =>
@@ -43,6 +46,8 @@ const Getproducts = () => {
     console.log(products)
     const imagepath = "http://vivakifaru.alwaysdata.net/static/images/"
 
+    
+        
 
     return (
         <div className="container-fluid">
@@ -79,6 +84,7 @@ const Getproducts = () => {
 
                                 {/* product cost goes here */}
                                 <b className='text-primary'>  Ksh {singleproduct.product_cost}</b><br />
+                                <button className='btn btn-success w-100' onClick={()=>{addToCart(singleproduct);navigate('/CartDisplay');}}>Add to cart</button>
 
                                 {/* purchase now button  */}
                                 <button className='btn btn-dark w-100' onClick={() => navigate("/makepayment", { state: { singleproduct } })}>Purchase now</button>
